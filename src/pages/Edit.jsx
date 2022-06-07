@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, PageHeader, Modal, Form, Input } from "antd";
 import moment from "moment";
 import E from "wangeditor";
+import { ArticleAddApi } from "../request/api";
 
 let editor = null;
 // console.log(new Date());
@@ -19,12 +20,21 @@ export default function Edit() {
       .validateFields() //校验  //字段
       .then((values) => {
         // form.resetFields(); //重置
-        console.log("Received values of form: ", values);
+        let { title, subTitle } = values;
+        console.log(content);
         //请求
+        ArticleAddApi({
+          title,
+          subTitle,
+          content,
+        }).then((res) => {
+          console.log(res);
+        });
       })
-      .catch(() => {
-        return;
-      });
+      //   .catch(() => {
+      //     return;
+      //   });
+      .catch(() => false);
   };
 
   //模拟componentDidMount
