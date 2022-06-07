@@ -12,14 +12,14 @@ export default function App() {
   return (
     <Layout id="app">
       <Header />
-      <div className="container">
+      <div className='container'>
         <Aside />
-        <Content>
-          <div className="container_box">
-            <Bread />
+        <div className='container_box'>
+          <Bread />
+          <div className="container_content">
             <Outlet />
           </div>
-        </Content>
+        </div>
       </div>
       <footer>Respect | Copyright &copy; 2022 Author 开黑吗</footer>
     </Layout>

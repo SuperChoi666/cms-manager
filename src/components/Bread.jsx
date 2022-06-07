@@ -33,11 +33,10 @@ export default function Bread() {
 },[pathname])
   
   return (
-    <Breadcrumb>
+    <Breadcrumb style={{height:'30px',lineHeight:'30px'}}>
       <Breadcrumb.Item href='/'>
         <HomeOutlined />
       </Breadcrumb.Item>
-
       <Breadcrumb.Item >{breadName}</Breadcrumb.Item>
     </Breadcrumb>
   );
