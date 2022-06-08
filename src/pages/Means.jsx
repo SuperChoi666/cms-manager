@@ -38,7 +38,8 @@ function beforeUpload (file) {
   };
 
 
-export default function Means() {
+export default function Means(props) {
+    console.log(props)
     const [loading,setLoading] =useState(false)
   const [imageUrl, setImageUrl] = useState("");
 
@@ -84,15 +85,20 @@ export default function Means() {
     }
 //上传成功
     if (info.file.status === 'done') {
-        message.success("图片上传成功")
         // 文件的名称
         // console .log(info.file.response.data.filePath)
       // Get this url from response in real world.
       getBase64(info.file.originFileObj, (url) => {
         setLoading(false);
         setImageUrl(url);
+        message.success("图片上传成功！")
         // 存储图片名称
         localStorage.setItem('avatar',info.file.response.data.filePath)
+        // 触发Header组件更新
+        // props.setMykey(props.myKey+1)
+        // message.success("头像修改成功！")
+        // window.location.reload()  //强制页面刷新
+        // react-redux
       });
     }
   };
