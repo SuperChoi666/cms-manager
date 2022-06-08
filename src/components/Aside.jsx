@@ -11,12 +11,12 @@ export default function Aside() {
     const location = useLocation()
     const [defaultKey,setDefaultKey]= useState('')
 
-    // 一般加个空数组就是为了模仿mounted
+    // 一般加个空数组就是为了模仿componentDidMounted
     useEffect(() => {
         let path =location.pathname
         let key=(path.split('/')[1])     //'/edit'->['','edit']
         setDefaultKey(key)
-    }, [])
+    }, [location.pathname])
 
     const onClick = (e) => {
         navigate('/'+ e.key);

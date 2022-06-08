@@ -16,6 +16,15 @@ export const ArticleListApi = (params) => request.get('/article', { params })
 // post不需要解构，可以直接用
 export const ArticleAddApi=(params)=> request.post('/article/add',  params )
 
+// 查看文章
+export const ArticleSearchApi = (params) => request.get(`/article/${params.id}`)
+
+//重新编辑文章
+export const ArticleUpdateApi = (params) => request.put('/article/Update',  params )
+// 删除文章
+export const ArticleDelApi = (params) => request.post('/article/remove',  params )
+
+
 
 // 辅助理解get参数【//解释说明需要】
 // axios.get({

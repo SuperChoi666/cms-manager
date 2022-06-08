@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { List, Skeleton, Pagination, Button } from "antd";
-import { ArticleListApi } from "../request/api";
-import moment from  "moment";
+import { List, Skeleton, Pagination, Button, message } from "antd";
+import { ArticleListApi, ArticleDelApi } from "../request/api";
+import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 export default function ListList() {
   const [list, setList] = useState([]);
+  const navigate = useNavigate();
+  // 检测数据变化
+  const [update, setUpdate] = useState([1]);
   const [total, setTotal] = useState(0);
   const [current, setCurrent] = useState(1);
   const [pageSize, setPageSize] = useState(10);
@@ -26,16 +30,31 @@ export default function ListList() {
     });
   };
 
-  //请求列表数据
+  //请求列表数据 componentDidMount
   useEffect(() => {
     getList(current);
   }, []);
-
-
+  //检测数据变化 模拟componentDidUpdate
+  useEffect(() => {
+    getList(current);
+  }, [update]);
   // 分页
   const onChange = (pages) => {
     // setCurrent(pages);  //setXX是异步的
     getList(pages);
+  };
+
+  // 删除
+  const delFn = (id) => {
+    // console.log(id)
+    ArticleDelApi({ id }).then((res) => {
+      if (res.errCode === 0) {
+        message.success(res.message);
+        //重新刷页面，要么重新请求这个列表的数据  window.reload   调用getList(1)  增加变量的检测
+        // getList(1);
+        setUpdate(update + 1);
+      }
+    });
   };
 
   return (
@@ -49,8 +68,15 @@ export default function ListList() {
           return (
             <List.Item
               actions={[
-                <Button type='primary' onClick={()=>console.log(item.id)}>编辑</Button>,
-                <Button type='danger' onClick={()=>console.log(item.id)}>删除</Button>,
+                <Button
+                  type="primary"
+                  onClick={() => navigate("/edit/" + item.id)}
+                >
+                  编辑
+                </Button>,
+                <Button type="danger" onClick={() => delFn(item.id)}>
+                  删除
+                </Button>,
               ]}
             >
               <Skeleton loading={false} title={false}>
@@ -65,7 +91,7 @@ export default function ListList() {
         }}
       />
       <Pagination
-      style={{float:'right',marginTop:'20px'}}
+        style={{ float: "right", marginTop: "20px" }}
         onChange={onChange}
         total={total}
         current={current}

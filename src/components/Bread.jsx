@@ -4,40 +4,41 @@ import { HomeOutlined } from "@ant-design/icons";
 import { useLocation } from "react-router-dom";
 
 export default function Bread() {
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
 
-  const [breadName, setBreadName] = useState('');
+  const [breadName, setBreadName] = useState("");
 
-//   console.log(location.pathname)
+  //   console.log(location.pathname)
 
   // 不是在组件mounted时去获取路径，而是路径一旦变化，就要获取对应的路径名称，并且修改Bread Name
 
   // 监听路由的路径(/list /edit /means)
-  useEffect(()=>{
-    switch(pathname){
-        case"/  ":
+  useEffect(() => {
+    switch (pathname) {
+      case "/listlist":
         setBreadName("查看文章列表List");
         break;
-    case"/listtable":
+      case "/listtable":
         setBreadName("查看文章列表Table");
         break;
-    case"/edit":
+      case "/edit":
         setBreadName("文章编辑");
         break;
-    case"/means":
+      case "/means":
         setBreadName("修改资料");
         break;
-    default:
+      default:
+        setBreadName(pathname.includes("edit") ? "文章编辑" : "");
         break;
-    } 
-},[pathname])
-  
+    }
+  }, [pathname]);
+
   return (
-    <Breadcrumb style={{height:'30px',lineHeight:'30px'}}>
-      <Breadcrumb.Item href='/'>
+    <Breadcrumb style={{ height: "30px", lineHeight: "30px" }}>
+      <Breadcrumb.Item href="/">
         <HomeOutlined />
       </Breadcrumb.Item>
-      <Breadcrumb.Item >{breadName}</Breadcrumb.Item>
+      <Breadcrumb.Item>{breadName}</Breadcrumb.Item>
     </Breadcrumb>
   );
 }
