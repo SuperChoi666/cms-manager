@@ -32,10 +32,13 @@ export default function Header() {
       setTimeout(()=>navigate('/login'),1500)
     
   };
+  const changeuserData=()=>{
+    navigate('/means')
+  }
 
   const menu = (
     <Menu>
-      <Menu.Item key={1}>修改资料</Menu.Item>
+      <Menu.Item key={1} onClick={changeuserData}>修改资料</Menu.Item>
 
       <Menu.Divider />
 

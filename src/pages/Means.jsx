@@ -97,7 +97,7 @@ export default function Means(props) {
         // 触发Header组件更新
         // props.setMykey(props.myKey+1)
         // message.success("头像修改成功！")
-        // window.location.reload()  //强制页面刷新
+        window.location.reload()  //强制页面刷新
         // react-redux
       });
     }
