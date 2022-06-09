@@ -22,7 +22,7 @@ export default function App() {
           </div>
         </div>
       </div>
-      <footer>Respect | Copyright &copy; 2022 Author 开黑吗</footer>
+      <footer>Respect | Copyright &copy; 2022 Choi 学习来源:前端aka</footer>
     </Layout>
   );
 }
